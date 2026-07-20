@@ -18,6 +18,9 @@ uv pip install --python .venv/bin/python "speech-to-speech[whisper-mlx]==0.2.11"
 echo "==> Whisper MLX の GPU 競合バグにパッチを適用"
 .venv/bin/python scripts/patch_whisper_mlx_lock.py
 
+echo "==> NLTK リソース検索バグにパッチを適用"
+.venv/bin/python scripts/patch_nltk_resources.py
+
 if command -v ollama >/dev/null 2>&1; then
   if ! ollama list | grep -q "^gemma4"; then
     echo "==> Ollama に gemma4 モデルを取得（約 10GB）"

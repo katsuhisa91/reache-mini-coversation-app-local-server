@@ -120,6 +120,17 @@ failed assertion `A command encoder is already encoding to this command buffer'
 `scripts/patch_whisper_mlx_lock.py` がインストール済みのハンドラーに
 `MLXLockContext` を差し込んで直列化します（`setup.sh` から自動適用、冪等）。
 
+### NLTK リソースの毎回ダウンロード
+
+speech-to-speech 0.2.11 は起動時に NLTK の品詞タガー
+`averaged_perceptron_tagger_eng` を誤って `tokenizers/` カテゴリで探すため
+（実体は `taggers/` 配下）、検索が常に失敗して毎回 `nltk.download()` が走ります。
+ネットワークが不調だとインデックス取得に失敗してプロセスごと落ち、
+オフラインでは起動できません。
+
+`scripts/patch_nltk_resources.py` が検索カテゴリを修正し、必要なリソースを
+事前ダウンロードします（`setup.sh` から自動適用、冪等）。
+
 ## 恒久的に動かす（任意）
 
 ログイン時に自動起動したい場合は launchd を使います。`scripts/run.sh` を
