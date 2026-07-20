@@ -69,6 +69,18 @@ LLM モデルを変えたい場合は環境変数で指定できます:
 S2S_MODEL_NAME=qwen3:8b ./scripts/run.sh
 ```
 
+## 停止
+
+フォアグラウンドで起動している場合は Ctrl+C で止められます。
+バックグラウンドで動かしている場合などは停止スクリプトを使ってください:
+
+```bash
+./scripts/stop.sh
+```
+
+ポート 8765（`S2S_PORT` で変更可）で待ち受けているプロセスを終了します。
+10 秒以内に終了しない場合は SIGKILL で強制停止します。
+
 ## Reachy Mini アプリ側の設定
 
 1. Mac の IP アドレスを調べる: `ipconfig getifaddr en0`
